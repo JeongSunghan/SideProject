@@ -4,7 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Wordle</title>
-    <!-- 노트북 실험 -->
     <link rel="stylesheet" href="wordle.css" />
   </head>
   <body>
@@ -25,12 +24,22 @@
     </div>
 
     <script>
-      // 정답 목록
-      const answerList = [ "basic", "black", "bread", "clean", "chair", "count", "drink"];
-      // 정답
-      const answer = answerList[Math.floor(Math.random() * answerList.length)];
-      let attempts = 0;  // 시도 횟수 추적
-      const maxAttempts = 5;  // 최대 시도 횟수
+      //정답 횟수 지정 하기
+      let answer = ""; 
+      let attempts = 0; 
+      const maxAttempts = 5; 
+
+      // 랜덤 워드 API를 통해 랜덤 5글자 단어를 가져오기
+      fetch("https://random-word-api.herokuapp.com/word?number=1&length=5")
+        .then((response) => response.json())
+        .then((data) => {
+          answer = data[0].toLowerCase(); 
+          console.log("Today's Word: " + answer); // 콘솔에 정답 출력 (디버깅용!! 나중에 주석 처리하기)
+        })
+        .catch((error) => {
+          console.error("Error fetching the word:", error);
+          alert("단어를 불러오는 데 실패했습니다. 다시 시도해주세요.");
+        });
 
       // 제출 버튼 클릭 시 실행
       document.querySelector("#submitBtn").addEventListener("click", function () {
@@ -47,17 +56,16 @@
           userGuess += inputs[i].value.toLowerCase();
         }
 
-        // 새로운 행을 만들어 이전 시도에 기록
         const previousAttempt = document.createElement('div');
         previousAttempt.classList.add('attempt-row');
 
         for (let i = 0; i < answer.length; i++) {
-          // 시각적 피드백을 위한 새로운 입력 필드 생성
+          // 시각적 피드백(UX)을 위한 새로운 입력 필드 생성
           const resultBox = document.createElement('input');
           resultBox.disabled = true;  // 입력 불가
 
           // 위치가 맞으면 초록색
-          if (inputs[i].value.toLowerCase() === answer[i].toLowerCase()) {
+          if (inputs[i].value.toLowerCase() === answer[i]) {
             resultBox.style.background = "green";
           } 
           // 위치가 틀리지만 문자가 존재하면 노란색
