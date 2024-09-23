@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>조커뽑기 카드 게임</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+
+        .game-board {
+            display: flex;
+            gap: 10px;
+            position: relative;
+            width: 600px;
+            height: 200px;
+        }
+
+        .card {
+            width: 100px;
+            height: 150px;
+            background-color: blue;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            font-size: 18px;
+            border-radius: 10px;
+            position: absolute;
+            transition: transform 0.5s ease, opacity 0.5s ease;
+            opacity: 1;
+        }
+
+        .card.hidden {
+            background-color: gray;
+        }
+
+        .card.shuffle {
+            transform: translate(0, 50px) rotate(720deg); /* 섞는 애니메이션 */
+            opacity: 0.5;
+        }
+
+        .message {
+            margin-top: 20px;
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="game-board" id="gameBoard">ㅋ
+        <!-- 카드들이 여기에 표시됩니다 -->
+    </div>
+
+    <div class="message" id="message"></div>
+
+    <script src="app.js"></script>
+</body>
+</html>
