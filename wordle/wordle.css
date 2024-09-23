@@ -1,0 +1,55 @@
+/* 전체 입력 필드 스타일 */
+input {
+    width: 50px;
+    height: 50px;
+    font-size: 40px;
+    text-align: center;
+    border: 2px solid #ccc; /* 기본 테두리 추가 */
+    border-radius: 5px;
+    margin: 5px; /* 입력 필드 간격 추가 */
+    box-sizing: border-box;
+    transition: background-color 0.3s ease, border-color 0.3s ease; /* 부드러운 애니메이션 */
+  }
+  
+  /* 제출 버튼 스타일 */
+  button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 18px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease; /* 배경색과 클릭 시 애니메이션 */
+  }
+  
+  button:hover {
+    background-color: #45a049; /* hover 시 버튼 색상 변화 */
+    transform: scale(1.05); /* 버튼에 마우스를 올릴 때 살짝 확대 */
+  }
+  
+  /* 버튼을 클릭할 때 시각적 피드백 추가 */
+  button:active {
+    transform: scale(0.95); /* 클릭 시 살짝 줄어듦 */
+  }
+  
+  /* 녹색, 노란색, 회색 상태의 스타일 (Wordle처럼 상태를 나타낼 때 사용 가능) */
+  .input.green {
+    background-color: #4CAF50;
+    border-color: #4CAF50;
+    color: white;
+  }
+  
+  .input.yellow {
+    background-color: #FFD700;
+    border-color: #FFD700;
+    color: white;
+  }
+  
+  .input.grey {
+    background-color: #d3d3d3;
+    border-color: #d3d3d3;
+    color: white;
+  }
+  

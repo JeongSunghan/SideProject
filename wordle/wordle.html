@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wordle</title>
+    <!-- 외부 CSS 파일을 링크 -->
+    <link rel="stylesheet" href="wordle.css" />
+  </head>
+  <body>
+    <!-- 게임 입력 필드 -->
+    <div id="inputContainer">
+      <input class="input" maxlength="1" />
+      <input class="input" maxlength="1" />
+      <input class="input" maxlength="1" />
+      <input class="input" maxlength="1" />
+      <input class="input" maxlength="1" />
+    </div>
+
+    <button id="submitBtn">제출</button>
+
+    <!-- 이전 시도한 답들을 표시할 영역 -->
+    <div id="previousAttemptsContainer">
+      <h3>이전 시도:</h3>
+    </div>
+
+    <script>
+      // 정답 목록
+      const answerList = [ "basic", "black", "bread", "clean", "chair", "count", "drink"];
+      // 정답
+      const answer = answerList[Math.floor(Math.random() * answerList.length)];
+      let attempts = 0;  // 시도 횟수 추적
+      const maxAttempts = 5;  // 최대 시도 횟수
+
+      // 제출 버튼 클릭 시 실행
+      document.querySelector("#submitBtn").addEventListener("click", function () {
+        if (attempts >= maxAttempts) {
+          alert("더 이상 시도할 수 없습니다!");
+          return;
+        }
+
+        const inputs = document.querySelectorAll(".input");
+        let userGuess = "";
+
+        // 사용자 입력 값을 저장
+        for (let i = 0; i < inputs.length; i++) {
+          userGuess += inputs[i].value.toLowerCase();
+        }
+
+        // 새로운 행을 만들어 이전 시도에 기록
+        const previousAttempt = document.createElement('div');
+        previousAttempt.classList.add('attempt-row');
+
+        for (let i = 0; i < answer.length; i++) {
+          // 시각적 피드백을 위한 새로운 입력 필드 생성
+          const resultBox = document.createElement('input');
+          resultBox.disabled = true;  // 입력 불가
+
+          // 위치가 맞으면 초록색
+          if (inputs[i].value.toLowerCase() === answer[i].toLowerCase()) {
+            resultBox.style.background = "green";
+          } 
+          // 위치가 틀리지만 문자가 존재하면 노란색
+          else if (answer.includes(inputs[i].value.toLowerCase())) {
+            resultBox.style.background = "yellow";
+          } 
+          // 둘 다 아니면 회색
+          else {
+            resultBox.style.background = "lightgrey";
+          }
+
+          // 이전 시도값을 기록
+          resultBox.value = inputs[i].value.toLowerCase();
+          resultBox.classList.add("input");
+          previousAttempt.appendChild(resultBox);
+        }
+
+        // 이전 시도 기록을 추가
+        document.querySelector("#previousAttemptsContainer").appendChild(previousAttempt);
+
+        attempts++;  // 시도 횟수 증가
+
+        // 새로운 입력을 위해 기존 필드 초기화
+        if (attempts < maxAttempts) {
+          for (let i = 0; i < inputs.length; i++) {
+            inputs[i].value = "";  // 필드 초기화
+            inputs[i].style.background = "";  // 배경색 초기화
+          }
+        } else {
+          alert("게임 종료! 정답은: " + answer);
+        }
+      });
+    </script>
+  </body>
+</html>
