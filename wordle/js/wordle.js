@@ -211,17 +211,20 @@ function displayLeaderboard() {
 
 // 각 입력 필드에 대해 자동으로 다음 필드로 이동 + 백스페이스 누르면 이전 필드로 이동
 document.querySelectorAll('.input').forEach((input, index, array) => {
-  // 입력했을 때 다음 필드로 이동
   input.addEventListener('input', function () {
     if (this.value.length === 1 && index < array.length - 1) {
-      array[index + 1].focus(); // 현재 입력이 완료되면 다음 필드로 포커스 이동
+      // 너무 빠르게 넘어가서 지연시간 추가 해보기, 정안되면 버리기
+      setTimeout(() => {
+        array[index + 1].focus(); 
+      }, 150); 
     }
   });
 
   // 백스페이스를 눌렀을 때 이전 필드로 이동
   input.addEventListener('keydown', function (event) {
     if (event.key === "Backspace" && this.value === "" && index > 0) {
-      array[index - 1].focus(); // 이전 필드로 포커스 이동
+      array[index - 1].focus(); 
     }
   });
 });
+
