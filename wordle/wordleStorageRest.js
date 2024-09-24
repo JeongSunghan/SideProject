@@ -14,3 +14,5 @@ document.querySelector("#clearDataBtn").addEventListener("click", function () {
     }
   });
   
+
+  // ㅇ
