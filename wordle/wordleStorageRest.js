@@ -3,9 +3,7 @@ document.querySelector("#clearDataBtn").addEventListener("click", function () {
     // 비밀번호 입력창 표시
     const password = prompt("비밀번호를 입력하세요:");
   
-    // 비밀번호가 2683과 일치하는지 확인
     if (password === "2683") {
-      // 로컬 스토리지에서 기록 삭제
       localStorage.removeItem("results");
       alert("기록이 초기화되었습니다.");
       displayLeaderboard(); // 리더보드 갱신
@@ -14,5 +12,6 @@ document.querySelector("#clearDataBtn").addEventListener("click", function () {
     }
   });
   
-
-  // ㅇ
+  
+  
+  

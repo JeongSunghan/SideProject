@@ -3,18 +3,27 @@ let attempts = 0;
 const maxAttempts = 5;
 let startTime, endTime; // 타이머용 변수
 
-// 랜덤 워드 API에서 단어를 가져오는 함수
-function fetchNewWord() {
-    fetch("https://random-word-api.herokuapp.com/word?number=1&length=5")
-        .then((response) => response.json())
-        .then((data) => {
-            answer = data[0].toLowerCase();
-            console.log("오늘의 단어: " + answer); // 콘솔에 정답 출력 (디버깅용)
-        })
-        .catch((error) => {
-            console.error("단어를 불러오는 중 오류:", error);
-            alert("단어를 불러오는 데 실패했습니다. 다시 시도해주세요.");
-        });
+// 단어를 가져오는 함수 - 전체 단어를 가져와서 5글자 단어만 필터링
+function fetchAllWords() {
+  const apiUrl = "https://random-word-api.herokuapp.com/all";
+
+  fetch(apiUrl)
+      .then((response) => response.json())
+      .then((data) => {
+          // 5글자 단어만 필터링하여 랜덤으로 선택
+          const fiveLetterWords = data.filter(word => word.length === 5);
+          if (fiveLetterWords.length > 0) {
+              answer = fiveLetterWords[Math.floor(Math.random() * fiveLetterWords.length)].toLowerCase();
+              console.log("오늘의 5글자 랜덤 단어:", answer);
+              // 콘솔 나중에 지우기 디버깅용입니다!
+          } else {
+              console.error("5글자 단어를 찾을 수 없습니다.");
+          }
+      })
+      .catch((error) => {
+          console.error("단어를 불러오는 중 오류:", error);
+          alert("단어를 불러오는 데 실패했습니다. 다시 시도해주세요.");
+      });
 }
 
 // 게임 초기화 함수 (정답과 입력 필드 모두 초기화)
@@ -34,7 +43,7 @@ function resetGame() {
     startTime = null;
 
     // 새 단어 불러오기
-    fetchNewWord();
+    fetchAllWords();
 
     // 게임 UI 초기화
     document.getElementById("gameContainer").style.display = "none"; // 게임 화면 숨기기
@@ -43,7 +52,7 @@ function resetGame() {
 }
 
 // 페이지가 로드될 때 첫 단어를 가져옴
-fetchNewWord();
+fetchAllWords();
 
 // 닉네임을 입력받아 게임을 시작
 document.getElementById("playerForm").addEventListener("submit", function (event) {
@@ -86,7 +95,7 @@ document.querySelector("#submitBtn").addEventListener("click", function () {
     const previousAttempt = document.createElement('div');
     previousAttempt.classList.add('attempt-row');
   
-    // 각 칸을 비교하여 시각적 피드백 제공
+    // 각 칸을 비교하여 시각 피드백 제공
     let correctGuessCount = 0; // 정답 맞춘 칸 수
   
     for (let i = 0; i < answer.length; i++) {
@@ -189,13 +198,4 @@ document.querySelectorAll('.input').forEach((input, index, array) => {
         array[index - 1].focus(); // 이전 필드로 포커스 이동
       }
     });
-
-    input.addEventListener('enter', function(event) {
-        if(event.key === "Enter" && this.value === "" && index > 0) { 
-            
-        }
-    })
-  });
-
-  // ㅇ
-  
+});
