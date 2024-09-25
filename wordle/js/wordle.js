@@ -1,8 +1,10 @@
-//변수 초기화 및 변경
-let answer = "";    
-let attempts = 0;  
-const maxAttempts = 6;  //단어 맞추는 최대 횟수(기본 값 : 6)
-let startTime, endTime; 
+// 변수 초기화 및 변경
+let answer = "";
+let attempts = 0;
+const maxAttempts = 6;  // 단어 맞추는 최대 횟수(기본 값 : 6)
+let startTime, endTime;
+let hintUsage = 0; // 힌트 사용 횟수
+const maxHints = 2; // 힌트 사용 가능 횟수
 
 // 단어를 가져오는 함수 - 전체 단어를 가져와서 5글자 단어만 필터링
 function fetchAllWords() {
@@ -17,8 +19,8 @@ function fetchAllWords() {
         answer = fiveLetterWords[Math.floor(Math.random() * fiveLetterWords.length)].toLowerCase();
 
         // ** 콘솔 나중에 지우기 디버깅용입니다!  **
-        console.log("오늘의 5글자 랜덤 단어:", answer);
-        
+        // console.log("오늘의 5글자 랜덤 단어:", answer);
+
       } else {
         console.error("5글자 단어를 찾을 수 없습니다.");
       }
@@ -29,26 +31,25 @@ function fetchAllWords() {
     });
 }
 
-// 게임 초기화 함수 (정답과 입력 필드 모두 초기화)
+
+// 게임 초기화 함수
 function resetGame() {
   document.querySelector("#previousAttemptsContainer").innerHTML = "<h3>이전 시도:</h3>";
 
-  // 입력 필드 초기화
   const inputs = document.querySelectorAll(".input");
   for (let i = 0; i < inputs.length; i++) {
-    inputs[i].value = "";          // 입력 필드 값 초기화
-    inputs[i].style.background = ""; // 입력 필드 배경색 초기화
+    inputs[i].value = "";
+    inputs[i].style.background = "";
   }
 
-  // 시도 횟수 및 타이머 초기화 및 단어 불러오기
   attempts = 0;
+  hintUsage = 0;  // 힌트 사용 횟수 초기화
   startTime = null;
   fetchAllWords();
 
-  // 게임 UI 초기화
-  document.getElementById("gameContainer").style.display = "none"; // 게임 화면 숨기기
-  document.getElementById("playerForm").style.display = "block";   // 닉네임 입력 폼 다시 표시
-  document.getElementById("nickname").value = "";                 // 닉네임 입력 필드 초기화
+  document.getElementById("gameContainer").style.display = "none";
+  document.getElementById("playerForm").style.display = "block";
+  document.getElementById("nickname").value = "";
 }
 
 // 페이지가 로드될 때 단어를 가져옴
@@ -105,7 +106,10 @@ document.querySelector("#submitBtn").addEventListener("click", function () {
     const resultBox = document.createElement('div'); // div로 수정해서 이전 시도 표시
     resultBox.classList.add("input-box"); // 스타일을 적용할 클래스 추가
 
-    if (inputs[i].value.toLowerCase() === answer[i]) {
+    // 입력값이 없는 경우 처리 (빈 값도 회색 처리)
+    if (inputs[i].value.trim() === "") {
+      resultBox.classList.add("grey"); // 아무것도 입력하지 않은 칸을 회색으로 처리
+    } else if (inputs[i].value.toLowerCase() === answer[i]) {
       resultBox.classList.add("green"); // 정답 위치
       correctGuessCount++; // 맞춘 칸 수 증가
     } else if (answer.includes(inputs[i].value.toLowerCase())) {
@@ -114,7 +118,7 @@ document.querySelector("#submitBtn").addEventListener("click", function () {
       resultBox.classList.add("grey"); // 정답 아님
     }
 
-    resultBox.textContent = inputs[i].value.toLowerCase(); // 입력한 값을 div에 표시
+    resultBox.textContent = inputs[i].value.toLowerCase() || "_"; // 입력한 값이 없을 경우 '_'로 표시
     previousAttempt.appendChild(resultBox); // 이전 시도에 추가
   }
 
@@ -150,6 +154,40 @@ document.querySelector("#submitBtn").addEventListener("click", function () {
   }
 });
 
+// update - 힌트 시스템
+document.getElementById("hintBtn").addEventListener("click", function () {
+  giveHint();
+});
+
+// 힌트 제공 함수 (사용자가 몇 번째 글자에 대한 힌트를 받을지 선택)
+function giveHint() {
+  if (hintUsage >= maxHints) {
+    alert("더 이상 힌트를 사용할 수 없습니다.");
+    return;
+  }
+
+  let hintIndex = prompt("몇 번째 글자의 힌트를 받으시겠습니까? (1~5 사이의 숫자를 입력하세요)");
+  
+  // 입력된 값이 유효 확인
+  if (!hintIndex || isNaN(hintIndex) || hintIndex < 1 || hintIndex > 5) {
+    alert("유효한 숫자를 입력하세요 (1~5).");
+    return;
+  }
+
+  // 인덱스 값 조정
+  hintIndex = parseInt(hintIndex) - 1;
+
+  // 선택된 글자가 이미 맞춘 글자인지 확인
+  const input = document.querySelectorAll(".input")[hintIndex];
+  if (input.value.toLowerCase() === answer[hintIndex]) {
+    alert("이미 맞춘 글자입니다! 다른 글자의 힌트를 선택해주세요.");
+    return;
+  }
+
+  alert("힌트: 정답의 " + (hintIndex + 1) + "번째 글자는 '" + answer[hintIndex].toUpperCase() + "' 입니다.");
+  
+  hintUsage++; // 힌트 사용 횟수 증가
+}
 
 
 // 결과 저장 함수 (로컬 스토리지)
@@ -215,16 +253,18 @@ document.querySelectorAll('.input').forEach((input, index, array) => {
     if (this.value.length === 1 && index < array.length - 1) {
       // 너무 빠르게 넘어가서 지연시간 추가 해보기, 정안되면 버리기
       setTimeout(() => {
-        array[index + 1].focus(); 
-      }, 150); 
+        array[index + 1].focus();
+      }, 50);
     }
   });
 
   // 백스페이스를 눌렀을 때 이전 필드로 이동
   input.addEventListener('keydown', function (event) {
     if (event.key === "Backspace" && this.value === "" && index > 0) {
-      array[index - 1].focus(); 
+      array[index - 1].focus();
     }
   });
 });
+
+// 수정
 
