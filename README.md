@@ -6,7 +6,7 @@
 
 ### 📋 **[ProjectList]**
 - 📝 **설명:** Wordle 게임을 HTML/CSS/JS를 복습하기 위해 만든 프로젝트 입니다..  
-- 🚀 [상세보기](https://jeongsunghan.github.io/wordle-game/)
+- 🚀 [플레이 / 확인하러가기](https://jeongsunghan.github.io/wordle-game/)
 
 # 📚 About
 이 리포지토리는 프론트엔드 / 백엔드 / 풀스택 개발 연습과 다양한 시도를 위해 만들어졌습니다.
