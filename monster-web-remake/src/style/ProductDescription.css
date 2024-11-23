@@ -1,0 +1,16 @@
+.product-description {
+    text-align: center;
+    color: #fff;
+  }
+  
+  .product-description h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+  }
+  
+  .product-description p {
+    font-size: 1.2rem;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  

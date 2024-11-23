@@ -1,0 +1,40 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: #000;
+  color: #fff;
+  position: relative;
+}
+
+.header a {
+  color: #fff;
+  text-decoration: none;
+  margin: 0 20px;
+  font-size: 1.1rem;
+}
+
+.header-logo {  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header-logo img.monster-logo {
+  width: 35px; /* 로고 너비 */
+  height: auto; /* 비율 유지 */
+}
+
+.header-right a {
+  font-size: 1.5rem;
+}
+
+.header-divider {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  border: none;
+  border-top: 1px solid #fff;
+}
