@@ -1,4 +1,9 @@
-.header {
+@font-face {
+  font-family: 'Darkcastle';
+  src: url('../fonts/Darkcastle_PERSONAL_USE_ONLY.otf') format('truetype');
+}
+
+.header {  
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -8,22 +13,23 @@
   position: relative;
 }
 
-.header a {
+.header a {  
+  font-family: 'Darkcastle', serif;    
   color: #fff;
   text-decoration: none;
-  margin: 0 20px;
-  font-size: 1.1rem;
+  margin: 0 20px;  
+  font-size: small;
 }
 
-.header-logo {  
+.header-logo {    
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .header-logo img.monster-logo {
-  width: 35px; /* 로고 너비 */
-  height: auto; /* 비율 유지 */
+  width: 35px; /* 로고 크기 */
+  margin-right: 150px;
 }
 
 .header-right a {

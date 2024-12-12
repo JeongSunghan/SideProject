@@ -13,71 +13,74 @@
   overflow: hidden;
 }
 
-/* 슬라이더 본체 */
+/* 슬라이더 전체 */
 .product-slider {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 35px 0;
-  width: 75%;
+  margin: 37.5px 0;
+  width: 100%;
 }
 
-/* 슬라이더 화살표 */
-.arrow-left,
-.arrow-right {
-  background: none;
-  border: none;
-  color: #fff;
-  font-size: 3rem;
-  cursor: pointer;
-  transition: color 0.3s ease;
-}
-
-.arrow-left:hover,
-.arrow-right:hover {
-  color: #ccc;
-}
-
-/* 슬라이더 이미지 목록 */
+/* 몬스터 이미지 목록 */
 .products {
   display: flex;
   justify-content: center;
-  gap: 20px; /* 이미지 간의 간격 */
+  gap: 35px; /* 이미지 간의 간격 */
   width: 100%;
 }
 
 .products img {
   max-width: 100px;
   height: auto;
-  opacity: 0.3; /* 기본적으로 흐리게 표시 */
-  transform: scale(0.8); /* 기본적으로 작게 표시 */
+  opacity: 0.35; 
+  transform: scale(0.85); 
   transition: transform 0.5s ease, opacity 0.5s ease;
 }
 
-.products img.active {
-  transform: scale(1.2); /* 선택된 이미지 확대 */
-  opacity: 1; /* 선택된 이미지 완전히 보이기 */
+.products img.hover {
+  transform: scale(1.15); 
+  opacity: 1; 
 }
 
-.products img.inactive {
-  transform: scale(0.8); /* 축소된 이미지 */
-  opacity: 0.3; /* 흐릿하게 표시 */
+/* 음료수  */
+.product-head {
+  text-align: center;  
 }
 
-/* 음료수 설명 */
-.product-info {
-  text-align: center;
-  margin-top: 20px;
-}
-
-.product-info h2 {
+.product-head h2 {
   font-family: 'Darkcastle', serif;
-  font-size: 2.5em;
-  font-weight: lighter;
-  margin-bottom: 10px;
+  font-size: 2.75rem;
+  font-weight: lighter;  
 }
 
-.product-info p {
-  font-size: 1em;
-  color: #666;
+
+/* 제목 키프레임 */
+@keyframes glitch {
+  0% {
+    text-shadow: 1.5px 1.5px 0 rgba(144, 238, 144, 0.5), -1.5px -1.5px 0 rgba(50, 205, 50, 0.4);
+  }
+  75% {
+    text-shadow: -1px -1px 0 rgba(144, 238, 144, 0.5), 1px 1px 0 rgba(50, 205, 50, 0.4);
+  }
+  100% {
+    text-shadow: 3px 3px 0 rgba(144, 238, 144, 0.5), -3px -3px 0 rgba(50, 205, 50, 0.4);
+  }
+}
+
+.mainhead-title {
+  font-family: "Darkcastle", serif;  
+  color: rgb(222, 226, 222); /* 연한 녹색 */
+  text-align: center;  
+  animation: glitch 1.5s infinite; 
+  cursor: default;
+}
+
+
+.mainhead-title:hover {
+  animation: glitch 1.25s infinite, textTransform 1s ease; 
+  color: rgb(157, 219, 40);
+  transform: rotate(-2deg) translateX(2px); 
+  text-transform: uppercase;
+  text-shadow: 0 0 30px rgba(50, 205, 50, 1), 0 0 60px rgba(144, 238, 144, 0.8);
 }
