@@ -1,65 +1,87 @@
+/* 폰트 설정 */
+@font-face {
+  font-family: 'Darkcastle';
+  src: url('../fonts/Darkcastle_PERSONAL_USE_ONLY.otf') format('truetype');
+}
+
+
 /* 디테일 전체 컨테이너 */
 .product-detail-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    margin: 0 auto;
-    max-width: 800px;
-    background-color: #000000; 
-    border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
-    text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  max-width: 800px;
+  background-color: #000000;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
+  text-align: center;
+}
+
+.go-home-btn {
+  margin-bottom: 20px;
+  background-color: transparent; 
+  color: rgb(230, 75, 75); 
+  border: 1px solid black; 
+
+  font-family: 'Darkcastle', serif;
+  font-weight: lighter;
+  font-size: large;;
+
+}
+
+.go-home-btn:hover{
+  transform: scale(1.05);
+  opacity: 0.5;
+  transition: transform 0.75 ease-out;
+}
+
+/* 캔 이미지 */
+.product-detail-container img {
+  max-width: 125px;
+  height: auto;
+  margin-bottom: 20px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* 텍스트 섹션 */
+.product-detail {
+  padding: 10px;
+}
+
+/* 제목 */
+.product-detail h2 {
+  font-family: "Darkcastle", serif;
+  font-size: 2.5rem;
+  color: white;
+  font-weight: lighter;
+  margin-bottom: 10px;
+}
+
+/* 설명 */
+.product-detail p {
+  font-size: 1.2rem;
+  color: #ccc;
+  line-height: 1.6;
+  margin: 0 20px;
+}
+
+/* 반응형 */
+@media (max-width: 768px) {
+  .product-detail-container {
+    padding: 15px;
   }
-  
-  /* 캔 이미지 */
-  .product-detail-container img {
-    max-width: 125px;
-    height: auto;
-    margin-bottom: 20px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-  
-  /* 텍스트 섹션 */
-  .product-detail {
-    padding: 10px;
-  
-  }
-  
-  /* 제목 */
+
   .product-detail h2 {
-    font-family: "Darkcastle", serif;
-    font-size: 2.5rem;
-    color: white; 
-    font-weight: lighter;  
-    margin-bottom: 10px;    
+    font-size: 2rem;
   }
-  
-  /* 설명 */
+
   .product-detail p {
-    font-size: 1.2rem;
-    color: #ccc;
-    line-height: 1.6;
-    margin: 0 20px;
+    font-size: 1rem;
   }
-  
-  /* 반응형 */
-  @media (max-width: 768px) {
-    .product-detail-container {
-      padding: 15px;
-    }
-  
-    .product-detail h2 {
-      font-size: 2rem;
-    }
-  
-    .product-detail p {
-      font-size: 1rem;
-    }
-  
-    .product-detail-container img {
-      max-width: 150px;
-    }
+
+  .product-detail-container img {
+    max-width: 150px;
   }
-  
+}

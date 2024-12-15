@@ -1,14 +1,14 @@
 .footer {
   background-color: #000;
   color: #fff;
-  padding: 30px 10px; /* 전체 여백 */
-  text-align: center; /* 중앙 정렬 */
+  padding: 30px 10px; 
+  text-align: center; 
   font-family: Arial, sans-serif;
 }
 
 .footer-logo img {
-  width: 100px; /* 로고 크기 */
-  margin-bottom: 15px; /* 로고, 뉴스레터 간 여백 */
+  width: 100px; 
+  margin-bottom: 15px; 
 }
 
 .footer-newsletter h3 {
@@ -25,7 +25,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 5px; /* 입력 필드와 버튼 간 간격 */
+  gap: 5px; 
 }
 
 .newsletter-input input {
@@ -34,7 +34,7 @@
   border: none;
   border-radius: 3px 0 0 3px;
   outline: none;
-  width: 250px; /* 입력 필드 크기 */
+  width: 250px; 
 }
 
 .newsletter-input button {

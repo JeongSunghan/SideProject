@@ -12,7 +12,7 @@ const Header = () => {
         {/* 몬스터 로고 이미지 */}
         <a href="#">
           <img
-            src="/images/m-mini-logo.png" // public 디렉토리 내부 파일의 URL
+            src="/images/m-mini-logo.png" 
             alt="Monster Energy"
             className="monster-logo"
           />

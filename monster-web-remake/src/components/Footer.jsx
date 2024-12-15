@@ -6,7 +6,7 @@ const Footer = () => {
     <footer className="footer">
       <div className="footer-logo">
         <img
-          src="/images/monster-logo.png" // 로고 이미지 경로
+          src="/images/monster-logo.png"
           alt="Monster Energy Logo"
         />
          <p>© Monster Energy Company<br />All Rights Reserved</p>

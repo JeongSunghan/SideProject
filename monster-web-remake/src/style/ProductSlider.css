@@ -10,7 +10,11 @@
   flex-direction: column;
   align-items: center;
   width: 100%;
-  overflow: hidden;
+  overflow: hidden;  .product-head h2 {
+    font-family: 'Darkcastle', serif;
+    font-size: 2.75rem;
+    font-weight: lighter;      
+  }  
 }
 
 /* 슬라이더 전체 */
@@ -19,14 +23,14 @@
   align-items: center;
   justify-content: center;
   margin: 37.5px 0;
-  width: 100%;
+  width: 100%;    
 }
 
 /* 몬스터 이미지 목록 */
 .products {
   display: flex;
   justify-content: center;
-  gap: 35px; /* 이미지 간의 간격 */
+  gap: 35px; 
   width: 100%;
 }
 
@@ -41,6 +45,7 @@
 .products img.hover {
   transform: scale(1.15); 
   opacity: 1; 
+  transition: transform 0.75s ease;
 }
 
 /* 음료수  */
@@ -58,29 +63,21 @@
 /* 제목 키프레임 */
 @keyframes glitch {
   0% {
-    text-shadow: 1.5px 1.5px 0 rgba(144, 238, 144, 0.5), -1.5px -1.5px 0 rgba(50, 205, 50, 0.4);
+    text-shadow: 1.5px 1.5px 0 rgba(192, 192, 192, 0.5), -1.5px -1.5px 0 rgba(211, 211, 211, 0.4);
   }
   75% {
-    text-shadow: -1px -1px 0 rgba(144, 238, 144, 0.5), 1px 1px 0 rgba(50, 205, 50, 0.4);
+    text-shadow: -1px -1px 0 rgba(192, 192, 192, 0.5), 1px 1px 0 rgba(211, 211, 211, 0.4);
   }
   100% {
-    text-shadow: 3px 3px 0 rgba(144, 238, 144, 0.5), -3px -3px 0 rgba(50, 205, 50, 0.4);
+    text-shadow: 3px 3px 0 rgba(192, 192, 192, 0.5), -3px -3px 0 rgba(211, 211, 211, 0.4);
   }
 }
 
 .mainhead-title {
   font-family: "Darkcastle", serif;  
-  color: rgb(222, 226, 222); /* 연한 녹색 */
+  color: rgb(222, 226, 222); 
   text-align: center;  
   animation: glitch 1.5s infinite; 
   cursor: default;
 }
 
-
-.mainhead-title:hover {
-  animation: glitch 1.25s infinite, textTransform 1s ease; 
-  color: rgb(157, 219, 40);
-  transform: rotate(-2deg) translateX(2px); 
-  text-transform: uppercase;
-  text-shadow: 0 0 30px rgba(50, 205, 50, 1), 0 0 60px rgba(144, 238, 144, 0.8);
-}

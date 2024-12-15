@@ -53,7 +53,7 @@ const productImages = [
 ];
 
 const ProductSlider = () => {
-  const [hoverIndex, setHoverIndex] = useState(null); // 호버 상태 관리
+  const [hoverIndex, setHoverIndex] = useState(null); 
   const navigate = useNavigate();
 
   const handleClick = (index) => {
@@ -63,7 +63,9 @@ const ProductSlider = () => {
   return (
     <div className="product-slider-container">
       <div className="product-head">
-        <h2 className="mainhead-title">Choose Your Monster</h2>        
+      <h2 className="mainhead-title">
+          {hoverIndex === null ? "Choose Your Monster" : productImages[hoverIndex].alt}
+        </h2>
       </div>
       <div className="product-slider">
         <div className="products">
@@ -72,9 +74,9 @@ const ProductSlider = () => {
               key={index}
               src={product.src}
               alt={product.alt}
-              className={index === hoverIndex ? "hover" : ""} // 호버 및 현재 상태에 따른 클래스
-              onMouseEnter={() => setHoverIndex(index)} // 호버 상태 업데이트
-              onMouseLeave={() => setHoverIndex(null)} // 호버 상태 초기화
+              className={index === hoverIndex ? "hover" : ""} 
+              onMouseEnter={() => setHoverIndex(index)} 
+              onMouseLeave={() => setHoverIndex(null)} 
               onClick={() => handleClick(index)}
             />
           ))}
